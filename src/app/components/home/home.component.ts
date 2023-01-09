@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CellValueChangedEvent } from 'ag-grid-community';
 import { User } from 'src/app/models/user.model';
+import { ApiService } from 'src/app/services/api.service';
 // import { AgGridModule } from 'ag-grid-angular';
 
 @Component({
@@ -22,10 +23,10 @@ export class HomeComponent implements OnInit {
     { field: 'country', sortable: true, editable: true },
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit(): void {
-    this.users = JSON.parse(localStorage.getItem("users") ?? JSON.stringify([]));
+    this.users = this.service.getUsers();
   }
 
   onCellValueChanged(event: CellValueChangedEvent) {
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
     this.users.map(function (user) {
       return newUser.id === user.id ? newUser : user;
     });
-    localStorage.setItem("users", JSON.stringify(this.users));
+    this.service.saveUsers(this.users);
   }
 
   back(): void {

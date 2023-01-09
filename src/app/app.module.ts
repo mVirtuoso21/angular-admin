@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AgGridModule } from 'ag-grid-angular';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AgGridModule } from 'ag-grid-angular';
     MatFormFieldModule,
     AgGridModule.withComponents(),
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
