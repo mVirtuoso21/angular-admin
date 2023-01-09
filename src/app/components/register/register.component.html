@@ -1,0 +1,63 @@
+<div class="header">
+    <h2>Register</h2>
+</div>
+<div>
+    <form [formGroup]="formGroup" (ngSubmit)="registerUser()">
+        <div class="form-fields-container">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email" />
+                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('email')">Invalid Email Format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="formGroup.get('password')?.hasError('required')">Required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Name (English)</mat-label>
+                <input type="text" matInput formControlName="englishName" />
+                <mat-error *ngIf="formGroup.get('englishName')?.hasError('required')">Required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Name (Arabic)</mat-label>
+                <input type="text" matInput formControlName="arabicName" />
+                <mat-error *ngIf="formGroup.get('arabicName')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="formGroup.get('arabicName')?.errors?.arabic">Only arabic characters are
+                    allowed</mat-error>
+            </mat-form-field>
+
+            <div
+                style="margin-left: 1rem; margin-right: 1rem; margin-top: 10px; padding-left: 15px; padding-right: 15px;">
+                <mat-label>Gender: </mat-label>
+                <mat-radio-group formControlName="gender">
+                    <mat-radio-button value="Male" style="margin-left: 1rem;">Male </mat-radio-button>
+                    <mat-radio-button value="Female" style="margin-left: 1rem;"> Female</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country" multiple>
+                    <mat-option *ngFor="let country of this.countries" [value]="country">{{country}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="formGroup.get('country')?.hasError('required')">Required</mat-error>
+            </mat-form-field>
+
+            <div class="button-container">
+                <button mat-raised-button color="primary" type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="button-container">
+    <button mat-raised-button color="primary" type="button" (click)="back()">Back</button>
+</div>

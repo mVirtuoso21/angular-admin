@@ -1,0 +1,32 @@
+<div class="header">
+    <h2>Login</h2>
+</div>
+<div>
+    <form [formGroup]="formGroup" (ngSubmit)="goHome()">
+        <div class="form-fields-container">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email" />
+                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('email')">Invalid Email Format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="formGroup.get('password')?.hasError('required')">Required</mat-error>
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button color="primary" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="button-container">
+    <button mat-raised-button color="primary" type="button" (click)="goToRegister()">Register</button>
+</div>
