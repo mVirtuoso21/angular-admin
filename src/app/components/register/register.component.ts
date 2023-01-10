@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { validateArabicName } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -15,34 +16,19 @@ export class RegisterComponent implements OnInit {
   countriesList: string[] = [];
   users: User[] = [];
 
-  constructor(private router: Router, private service: ApiService, private fb: FormBuilder) { }
+  constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
       englishName: new FormControl(null, Validators.required),
-      arabicName: new FormControl(null, [Validators.required, this.validateArabicName()]),
+      arabicName: new FormControl(null, { validators: [Validators.required, validateArabicName()], updateOn: "change" },),
       gender: new FormControl("Male", Validators.required),
-      country: new FormControl(null, Validators.required),
+      country: new FormArray([], [Validators.required]),
     });
     this.users = this.service.getUsers();
     this.countriesList = this.service.getCountries();
-  }
-
-  validateArabicName(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let value: string = control.value;
-      if (!value) {
-        return null;
-      }
-      let isArabic = true;
-      let regexp = /[\u0600-\u06ff\s]/;
-      for (let char of value) {
-        isArabic &&= regexp.test(char);
-      }
-      return !isArabic ? { arabic: true } : null;
-    }
   }
 
   registerUser(): void {
@@ -51,6 +37,20 @@ export class RegisterComponent implements OnInit {
       this.service.saveUsers(this.users);
       this.back();
     }
+  }
+
+  get country() {
+    return this.formGroup.controls["country"] as FormArray;
+  }
+
+  addCountry() {
+    let control = new FormControl("");
+    control.setValue("Lebanon");
+    this.country.push(control);
+  }
+
+  removeCountry(countryIndex: number) {
+    this.country.removeAt(countryIndex);
   }
 
   back(): void {

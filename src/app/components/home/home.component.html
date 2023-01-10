@@ -2,10 +2,25 @@
     <h2>Dashboard</h2>
 </div>
 
-<div class="header" style="height: 60%;">
-    <ag-grid-angular #agGrid id="grid" style="width: 100%; height: 100%;" class="ag-theme-alpine" [rowData]="users"
-        [columnDefs]="columnDefs" [animateRows]="true" (cellValueChanged)="onCellValueChanged($event)">
-    </ag-grid-angular>
+<div style="margin-left: 2rem; margin-right: 2rem;">
+    <table class="usersTable">
+        <thead>
+            <th></th>
+            <th *ngFor="let column of columns">{{column}}</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users" data="user.id">
+                <td> <button mat-button color="primary" type="button" (click)="editUser(user.id)">Edit</button></td>
+                <td>{{user.id}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.englishName}}</td>
+                <td>{{user.arabicName}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.country}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="button-container">

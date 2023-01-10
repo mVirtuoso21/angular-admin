@@ -14,8 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AgGridModule } from 'ag-grid-angular';
 import { ApiService } from './services/api.service';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { ApiService } from './services/api.service';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,6 @@ import { ApiService } from './services/api.service';
     MatRadioModule,
     MatSelectModule,
     MatFormFieldModule,
-    AgGridModule.withComponents(),
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],

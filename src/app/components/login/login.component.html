@@ -1,13 +1,13 @@
 <div class="header">
     <h2>Login</h2>
 </div>
-<div style="display: flex; flex-flow: row wrap; width: 50%;">
+<div style="display: flex; flex-flow: row wrap; width: 100%;">
     <div>
         <img src="../../../assets/admin-icon.jpg" alt="admin-icon" style="max-width: 350px;">
     </div>
-    <div style="flex: 0;">
+    <div>
         <form [formGroup]=" formGroup" (ngSubmit)="goHome()">
-            <div class="form-fields-container" style="min-width: 350px;">
+            <div class="form-fields-container" style="min-width: 450px;">
                 <mat-form-field>
                     <mat-label>Email</mat-label>
                     <input type="text" matInput formControlName="email" />

@@ -1,3 +1,5 @@
+import { ApiService } from "../services/api.service";
+
 export class User {
     id: number;
     email: string;
@@ -6,6 +8,7 @@ export class User {
     arabicName: string;
     gender: string;
     country: string;
+    service: ApiService = new ApiService();
 
     constructor(email: string, password: string, englishName: string, arabicName: string, gender: string, country: string) {
         this.id = this.getNewUserId();
@@ -18,7 +21,7 @@ export class User {
     }
 
     getNewUserId(): number {
-        let users: User[] = JSON.parse(localStorage.getItem("users") ?? JSON.stringify([]));
+        let users = this.service.getUsers();
         let id = 1;
         users.forEach(user => {
             if (user.id >= id) {

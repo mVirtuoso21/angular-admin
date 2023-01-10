@@ -1,8 +1,8 @@
 <div class="header">
-    <h2>Register</h2>
+    <h2>Edit User</h2>
 </div>
 <div>
-    <form [formGroup]="formGroup" (ngSubmit)="registerUser()">
+    <form [formGroup]="formGroup" (ngSubmit)="editUser()">
         <div class="form-fields-container">
             <mat-form-field>
                 <mat-label>Email</mat-label>
@@ -60,11 +60,8 @@
             </div>
 
             <div class="button-container">
-                <button mat-raised-button color="primary" type="submit">Register</button>
+                <button mat-raised-button color="primary" type="button">Edit User</button>
             </div>
         </div>
     </form>
-</div>
-<div class="button-container">
-    <button mat-raised-button color="primary" type="button" (click)="back()">Back</button>
 </div>
