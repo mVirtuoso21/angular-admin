@@ -19,8 +19,13 @@ export class HomeComponent implements OnInit {
     { field: 'password', sortable: true, editable: true },
     { field: 'englishName', sortable: true, editable: true },
     { field: 'arabicName', sortable: true, editable: true },
-    { field: 'gender', sortable: true, editable: true },
-    { field: 'country', sortable: true, editable: true },
+    {
+      field: 'gender', sortable: true, editable: true, cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['Male', 'Female'],
+      }
+    },
+    { field: 'country', sortable: true, editable: true, cellEditor: 'agSelectCellEditor', cellEditorParams: { values: this.service.getCountries() } },
   ];
 
   constructor(private router: Router, private service: ApiService) { }
