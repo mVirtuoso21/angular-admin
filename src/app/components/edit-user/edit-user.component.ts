@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { validateArabicName } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private service: ApiService) { }
+  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router) { }
 
   users: User[] = [];
   userId: any;
@@ -21,18 +21,21 @@ export class EditUserComponent implements OnInit {
   formGroup: any;
   user: any;
   hide = true;
+  dialog: any;
+  snackbar: any;
+  index: number = -1;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.userId = Number.parseInt(params.userId);
     });
     this.users = this.service.getUsers();
-    this.users.forEach(user => {
+    this.users.forEach((user, i) => {
       if (this.userId === user.id) {
         this.user = user;
+        this.index = i;
       }
     });
-    console.log(this.user);
     this.countriesList = this.service.getCountries();
     let userCountriesControls: FormControl[] = [];
 
@@ -62,11 +65,21 @@ export class EditUserComponent implements OnInit {
   }
 
   removeCountry(countryIndex: number) {
-    this.country.removeAt(countryIndex)
+    this.country.removeAt(countryIndex);
   }
 
   editUser() {
-    console.log(this.user);
+    this.saved = true;
+    if (this.formGroup.valid) {
+      this.users[this.index].email = this.formGroup.controls["email"].value;
+      this.users[this.index].password = this.formGroup.controls["password"].value;
+      this.users[this.index].englishName = this.formGroup.controls["englishName"].value;
+      this.users[this.index].arabicName = this.formGroup.controls["arabicName"].value;
+      this.users[this.index].gender = this.formGroup.controls["gender"].value;
+      this.users[this.index].country = this.formGroup.controls["country"].value;
+      this.service.saveUsers(this.users);
+      this.router.navigate(['/home']);
+    }
   }
 
 }

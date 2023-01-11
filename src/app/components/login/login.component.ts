@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   goHome(): void {
     let userExists = false;
-    let users = this.service.getUsers();
+    let users: User[] = this.service.getUsers();
     users.forEach(user => {
       if (user.email === this.formGroup.controls.email.value && user.password === this.formGroup.controls.password.value) {
         userExists = true;

@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApiService } from './services/api.service';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 
@@ -37,8 +39,12 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     MatRadioModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+
+
