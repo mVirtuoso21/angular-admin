@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   hide = true;
   countriesList: string[] = [];
   users: User[] = [];
+  addedCountry = false;
+  formSubmitted = false;
 
   constructor(private router: Router, private service: ApiService) { }
 
@@ -32,6 +34,8 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(): void {
+    this.formSubmitted = true;
+    this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this.users.push(new User(this.formGroup.controls["email"].value, this.formGroup.controls["password"].value, this.formGroup.controls["englishName"].value, this.formGroup.controls["arabicName"].value, this.formGroup.controls["gender"].value, this.formGroup.controls["country"].value));
       this.service.saveUsers(this.users);
@@ -47,6 +51,7 @@ export class RegisterComponent implements OnInit {
     let control = new FormControl("");
     control.setValue("Lebanon");
     this.country.push(control);
+    this.addedCountry = true;
   }
 
   removeCountry(countryIndex: number) {

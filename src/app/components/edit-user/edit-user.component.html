@@ -44,19 +44,23 @@
                 </mat-radio-group>
             </div>
 
-            <div
-                style="margin-top: 10px; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">
-                <button mat-button color="primary" type="button" (click)="addCountry()">Add Country</button>
-                <mat-error *ngIf="formGroup.get('country').hasError('required') ">Required</mat-error>
+            <div>
+                <button mat-button color="primary" type="button" (click)="addCountry()"
+                    style="margin-top: 10px; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">Add
+                    Country</button>
                 <div formArrayName="country">
                     <div *ngFor="let c of country.controls; let i = index">
-                        <mat-select [formControlName]="i" placeholder="Country">
-                            <mat-option *ngFor="let n of this.countriesList" [value]="n">{{n}}</mat-option>
-                        </mat-select>
+                        <mat-form-field>
+                            <mat-select [formControlName]="i" placeholder="Country">
+                                <mat-option *ngFor="let n of this.countriesList" [value]="n">{{n}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                         <button mat-button color="primary" type="button" (click)="removeCountry(i)">Remove
                             Country</button>
                     </div>
                 </div>
+                <mat-error *ngIf="formGroup.get('country').hasError('required')"
+                    style="font-size: 8pt; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">Required</mat-error>
             </div>
 
             <div class="button-container">
