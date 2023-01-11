@@ -1,37 +1,51 @@
-<div class="header">
-    <h2>Login</h2>
-</div>
-<div style="display: flex; flex-flow: row wrap; width: 100%;">
-    <div>
-        <img src="../../../assets/admin-icon.jpg" alt="admin-icon" style="max-width: 350px;">
+<div [dir]="textDirection">
+    <div class="header">
+        <h2>{{ "login" | translate}}</h2>
     </div>
-    <div>
-        <form [formGroup]=" formGroup" (ngSubmit)="goHome()">
-            <div class="form-fields-container" style="min-width: 450px;">
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input type="text" matInput formControlName="email" />
-                    <mat-error *ngIf="formGroup.get('email')?.hasError('required')">Required</mat-error>
-                    <mat-error *ngIf="formGroup.get('email')?.hasError('email')">Invalid Email Format</mat-error>
-                </mat-form-field>
+    <div [ngStyle]="{'float': textDirection == 'rtl' ? 'left' : 'right'}"
+        style="margin-right: 1rem; margin-left: 1rem;">
+        <mat-select (valueChange)="selectLanguage($event)" style="width: 150px;" placeholder="{{ 'language.select' |
+            translate }}">
+            <mat-option value="en-US">{{ "language.english" | translate }}</mat-option>
+            <mat-option value="ar-LB">{{ "language.arabic" | translate }}</mat-option>
+        </mat-select>
+    </div>
+    <div style="display: flex; flex-flow: row wrap; width: 100%;">
+        <div>
+            <img src="../../../assets/admin-icon.jpg" alt="admin-icon" style="max-width: 350px;">
+        </div>
+        <div>
+            <form [formGroup]=" formGroup" (ngSubmit)="goHome()">
+                <div class="form-fields-container" style="min-width: 450px;">
+                    <mat-form-field>
+                        <mat-label>{{ "email" | translate}}</mat-label>
+                        <input type="text" matInput formControlName="email" />
+                        <mat-error *ngIf="formGroup.get('email')?.hasError('required')">{{ "required" | translate
+                            }}</mat-error>
+                        <mat-error *ngIf="formGroup.get('email')?.hasError('email')">{{ 'email.error' | translate
+                            }}</mat-error>
+                    </mat-form-field>
 
-                <mat-form-field>
-                    <mat-label>Password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
-                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
-                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="formGroup.get('password')?.hasError('required')">Required</mat-error>
-                </mat-form-field>
-                <div class="button-container">
-                    <button mat-raised-button color="primary" type="submit">Login</button>
+                    <mat-form-field>
+                        <mat-label>{{ "password" | translate}}</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="formGroup.get('password')?.hasError('required')">{{ "required" | translate
+                            }}</mat-error>
+                    </mat-form-field>
+                    <div class="button-container">
+                        <button mat-raised-button color="primary" type="submit">{{ "login" | translate}}</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="button-container">
-    <button mat-raised-button color="primary" type="button" (click)="goToRegister()">Register</button>
+    <div class="button-container">
+        <button mat-raised-button color="primary" type="button" (click)="goToRegister()">{{ "register" | translate
+            }}</button>
+    </div>
 </div>

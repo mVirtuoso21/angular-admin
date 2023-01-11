@@ -1,78 +1,85 @@
-<div class="header">
-    <h2>Register</h2>
-</div>
-<div>
-    <form [formGroup]="formGroup" (ngSubmit)="registerUser()">
-        <div class="form-fields-container">
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="email" />
-                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">Required</mat-error>
-                <mat-error *ngIf="formGroup.get('email')?.hasError('email')">Invalid Email Format</mat-error>
-            </mat-form-field>
+<div [dir]="textDirection">
+    <div class="header">
+        <h2>{{ 'register' | translate }}</h2>
+    </div>
+    <div>
+        <form [formGroup]="formGroup" (ngSubmit)="registerUser()">
+            <div class="form-fields-container">
+                <mat-form-field>
+                    <mat-label>{{ 'email' | translate }}</mat-label>
+                    <input type="text" matInput formControlName="email" />
+                    <mat-error *ngIf="formGroup.get('email')?.hasError('required')">{{ 'required' | translate
+                        }}</mat-error>
+                    <mat-error *ngIf="formGroup.get('email')?.hasError('email')">{{ 'email.error' | translate
+                        }}</mat-error>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
-                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="formGroup.get('password')?.hasError('required')">Required</mat-error>
-            </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'password' | translate }}</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formGroup.get('password')?.hasError('required')">{{ 'required' | translate
+                        }}</mat-error>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Name (English)</mat-label>
-                <input type="text" matInput formControlName="englishName" />
-                <mat-error *ngIf="formGroup.get('englishName')?.hasError('required')">Required</mat-error>
-            </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'name.english' | translate }}</mat-label>
+                    <input type="text" matInput formControlName="englishName" />
+                    <mat-error *ngIf="formGroup.get('englishName')?.hasError('required')">{{ 'required' | translate
+                        }}</mat-error>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Name (Arabic)</mat-label>
-                <input type="text" matInput formControlName="arabicName" />
-                <mat-error *ngIf="formGroup.get('arabicName')?.hasError('required')">Required</mat-error>
-                <mat-error *ngIf="formGroup.get('arabicName')?.errors?.arabic">Only arabic characters are
-                    allowed</mat-error>
-            </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'name.arabic' | translate }}</mat-label>
+                    <input type="text" matInput formControlName="arabicName" />
+                    <mat-error *ngIf="formGroup.get('arabicName')?.hasError('required')">{{ 'required' | translate
+                        }}</mat-error>
+                    <mat-error *ngIf="formGroup.get('arabicName')?.errors?.arabic">{{ 'name.arabic.error' | translate
+                        }}</mat-error>
+                </mat-form-field>
 
-            <div
-                style="margin-left: 1rem; margin-right: 1rem; margin-top: 10px; padding-left: 15px; padding-right: 15px;">
-                <mat-label>Gender: </mat-label>
-                <mat-radio-group formControlName="gender">
-                    <mat-radio-button value="Male" style="margin-left: 1rem;">Male </mat-radio-button>
-                    <mat-radio-button value="Female" style="margin-left: 1rem;"> Female</mat-radio-button>
-                </mat-radio-group>
-            </div>
-
-            <div>
-                <button mat-button color="primary" type="button" (click)="addCountry()"
-                    style="margin-top: 10px; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">Add
-                    Country</button>
-                <div formArrayName="country">
-                    <div *ngFor="let c of country.controls; let i = index">
-                        <mat-form-field>
-                            <mat-select [formControlName]="i">
-                                <mat-option *ngFor="let n of this.countriesList" [value]="n">{{n}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-button color="primary" type="button" (click)="removeCountry(i)">Remove
-                            Country</button>
-                    </div>
+                <div
+                    style="margin-left: 1rem; margin-right: 1rem; margin-top: 10px; padding-left: 15px; padding-right: 15px;">
+                    <mat-label>{{ 'gender' | translate }}: </mat-label>
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="Male" style="margin-left: 1rem;">{{ 'gender.male' | translate }}
+                        </mat-radio-button>
+                        <mat-radio-button value="Female" style="margin-left: 1rem;">{{ 'gender.female' | translate
+                            }}</mat-radio-button>
+                    </mat-radio-group>
                 </div>
-                <mat-error
-                    *ngIf="(formGroup.get('country').hasError('required') && formSubmitted) || (formGroup.get('country').hasError('required') && addedCountry)"
-                    style="font-size: 8pt; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">Required</mat-error>
-            </div>
 
-            <div class="button-container">
-                <button mat-raised-button color="primary" type="submit">Register</button>
+                <div>
+                    <button mat-button color="primary" type="button" (click)="addCountry()"
+                        style="margin-top: 10px; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">{{
+                        'country.add' | translate }}</button>
+                    <div formArrayName="country">
+                        <div *ngFor="let c of country.controls; let i = index">
+                            <mat-form-field>
+                                <mat-select [formControlName]="i">
+                                    <mat-option *ngFor="let n of this.countriesList" [value]="n">{{n}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button mat-button color="primary" type="button" (click)="removeCountry(i)">{{
+                                'country.remove' | translate }}</button>
+                        </div>
+                    </div>
+                    <mat-error
+                        *ngIf="(formGroup.get('country').hasError('required') && formSubmitted) || (formGroup.get('country').hasError('required') && addedCountry)"
+                        style="font-size: 8pt; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">{{
+                        'required' | translate }}</mat-error>
+                </div>
+
+                <div class="button-container">
+                    <button mat-raised-button color="primary" type="submit">{{ 'register' | translate }}</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+    <div class="button-container">
+        <button mat-raised-button color="primary" type="button" (click)="back()">{{ 'back' | translate }}</button>
+    </div>
 </div>
-<div class="button-container">
-    <button mat-raised-button color="primary" type="button" (click)="back()">Back</button>
-</div>
-<!-- <div class="button-container">
-    <button mat-raised-button color="primary" type="button" (click)="mylog()">Log</button>
-</div> -->

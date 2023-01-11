@@ -1,28 +1,30 @@
-<div class="header">
-    <h2>Dashboard</h2>
-</div>
+<div [dir]="textDirection">
+    <div class="header">
+        <h2>{{ 'dashboard' | translate }}</h2>
+    </div>
+    <div style="margin-left: 2rem; margin-right: 2rem;">
+        <table class="usersTable">
+            <thead>
+                <th></th>
+                <th *ngFor="let column of columns">{{ column | translate }}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users" data="user.id">
+                    <td> <button mat-button color="primary" type="button" (click)="editUser(user.id)">{{ 'edit' |
+                            translate }}</button></td>
+                    <td>{{user.id}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.englishName}}</td>
+                    <td>{{user.arabicName}}</td>
+                    <td>{{user.gender}}</td>
+                    <td>{{user.country}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div style="margin-left: 2rem; margin-right: 2rem;">
-    <table class="usersTable">
-        <thead>
-            <th></th>
-            <th *ngFor="let column of columns">{{column}}</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users" data="user.id">
-                <td> <button mat-button color="primary" type="button" (click)="editUser(user.id)">Edit</button></td>
-                <td>{{user.id}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.password}}</td>
-                <td>{{user.englishName}}</td>
-                <td>{{user.arabicName}}</td>
-                <td>{{user.gender}}</td>
-                <td>{{user.country}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="button-container">
-    <button mat-raised-button color="primary" type="button" (click)="back()">Logout</button>
+    <div class="button-container">
+        <button mat-raised-button color="primary" type="button" (click)="back()">{{ 'logout' | translate }}</button>
+    </div>
 </div>

@@ -1,6 +1,8 @@
+import { Direction } from '@angular/cdk/bidi';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { validateArabicName } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,7 +14,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router, private translateService: TranslateService) { }
 
   users: User[] = [];
   userId: any;
@@ -24,6 +26,7 @@ export class EditUserComponent implements OnInit {
   dialog: any;
   snackbar: any;
   index: number = -1;
+  textDirection: Direction = "ltr";
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -52,6 +55,17 @@ export class EditUserComponent implements OnInit {
       gender: new FormControl(this.user.gender, Validators.required),
       country: new FormArray(userCountriesControls, [Validators.required])
     });
+    if (!this.translateService.currentLang) {
+      this.textDirection = "ltr";
+    }
+    else {
+      if (this.translateService.currentLang === "ar-LB") {
+        this.textDirection = "rtl";
+      }
+      else {
+        this.textDirection = "ltr";
+      }
+    }
   }
 
   get country() {
@@ -81,5 +95,4 @@ export class EditUserComponent implements OnInit {
       this.router.navigate(['/home']);
     }
   }
-
 }

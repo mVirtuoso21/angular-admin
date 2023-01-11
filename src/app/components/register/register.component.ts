@@ -1,6 +1,8 @@
+import { Direction } from '@angular/cdk/bidi';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { validateArabicName } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -17,8 +19,9 @@ export class RegisterComponent implements OnInit {
   users: User[] = [];
   addedCountry = false;
   formSubmitted = false;
+  textDirection: Direction = "ltr";
 
-  constructor(private router: Router, private service: ApiService) { }
+  constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -31,6 +34,17 @@ export class RegisterComponent implements OnInit {
     });
     this.users = this.service.getUsers();
     this.countriesList = this.service.getCountries();
+    if (!this.translateService.currentLang) {
+      this.textDirection = "ltr";
+    }
+    else {
+      if (this.translateService.currentLang === "ar-LB") {
+        this.textDirection = "rtl";
+      }
+      else {
+        this.textDirection = "ltr";
+      }
+    }
   }
 
   registerUser(): void {

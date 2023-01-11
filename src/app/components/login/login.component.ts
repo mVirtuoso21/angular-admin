@@ -1,6 +1,8 @@
+import { Direction } from '@angular/cdk/bidi';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -12,14 +14,26 @@ import { ApiService } from 'src/app/services/api.service';
 export class LoginComponent implements OnInit {
   formGroup: any;
   hide = true;
+  textDirection: Direction = "ltr";
 
-  constructor(private router: Router, private service: ApiService) { }
+  constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
     });
+    if (!this.translateService.currentLang) {
+      this.textDirection = "ltr";
+    }
+    else {
+      if (this.translateService.currentLang === "ar-LB") {
+        this.textDirection = "rtl";
+      }
+      else {
+        this.textDirection = "ltr";
+      }
+    }
   }
 
   goToRegister(): void {
@@ -39,6 +53,16 @@ export class LoginComponent implements OnInit {
     }
     else {
       alert("Invalid Credentials!");
+    }
+  }
+
+  selectLanguage(event: any) {
+    this.translateService.use(event);
+    if (event === "ar-LB") {
+      this.textDirection = "rtl";
+    }
+    else {
+      this.textDirection = "ltr";
     }
   }
 }

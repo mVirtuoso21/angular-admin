@@ -1,5 +1,7 @@
+import { Direction } from '@angular/cdk/bidi';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,15 +11,25 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   users: User[] = [];
+  columns: string[] = ["id", "email", "password", "name.english", "name.arabic", "gender", "country"];
+  textDirection: Direction = "ltr";
 
-  columns: string[] = ["ID", "Email", "Password", "Name (English)", "Name (Arabic)", "Gender", "Country"];
-
-  constructor(private router: Router, private service: ApiService) { }
+  constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.users = this.service.getUsers();
+    if (!this.translateService.currentLang) {
+      this.textDirection = "ltr";
+    }
+    else {
+      if (this.translateService.currentLang === "ar-LB") {
+        this.textDirection = "rtl";
+      }
+      else {
+        this.textDirection = "ltr";
+      }
+    }
   }
 
   editUser(userId: number): void {
