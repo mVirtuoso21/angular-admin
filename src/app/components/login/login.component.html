@@ -1,14 +1,6 @@
-<div [dir]="textDirection">
+<div>
     <div class="header">
         <h2>{{ "login" | translate}}</h2>
-    </div>
-    <div [ngStyle]="{'float': textDirection == 'rtl' ? 'left' : 'right'}"
-        style="margin-right: 1rem; margin-left: 1rem;">
-        <mat-select (valueChange)="selectLanguage($event)" style="width: 150px;" placeholder="{{ 'language.select' |
-            translate }}">
-            <mat-option value="en-US">{{ "language.english" | translate }}</mat-option>
-            <mat-option value="ar-LB">{{ "language.arabic" | translate }}</mat-option>
-        </mat-select>
     </div>
     <div style="display: flex; flex-flow: row wrap; width: 100%;">
         <div>

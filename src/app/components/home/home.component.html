@@ -1,6 +1,6 @@
-<div [dir]="textDirection">
+<div>
     <div class="header">
-        <h2>{{ 'dashboard' | translate }}</h2>
+        <h2>{{ 'dashboard' | translate }}&nbsp;{{getTranslatedName()}}</h2>
     </div>
     <div style="margin-left: 2rem; margin-right: 2rem;">
         <table class="usersTable">
@@ -17,8 +17,8 @@
                     <td>{{user.password}}</td>
                     <td>{{user.englishName}}</td>
                     <td>{{user.arabicName}}</td>
-                    <td>{{user.gender}}</td>
-                    <td>{{user.country}}</td>
+                    <td>{{ user.gender | translate }}</td>
+                    <td>{{userCountries(user.country)}}</td>
                 </tr>
             </tbody>
         </table>

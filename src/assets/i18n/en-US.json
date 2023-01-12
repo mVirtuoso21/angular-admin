@@ -11,8 +11,8 @@
     "name.arabic": "Name (Arabic)",
     "name.arabic.error": "Only arabic letters are allowed",
     "gender": "Gender",
-    "gender.male": "Male",
-    "gender.female": "Female",
+    "Male": "Male",
+    "Female": "Female",
     "country": "Country",
     "login": "Login",
     "logout": "Logout",
@@ -24,5 +24,10 @@
     "dashboard": "Dashboard",
     "edit": "Edit",
     "edit.user": "Edit User",
-    "save": "Save"
+    "save": "Save",
+    "Lebanon": "Lebanon",
+    "Libya": "Libya",
+    "Latvia": "Latvia",
+    "Liberia": "Liberia",
+    "adminApp": "Admin App"
 }

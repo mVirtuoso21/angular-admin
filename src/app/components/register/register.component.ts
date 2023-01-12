@@ -1,4 +1,3 @@
-import { Direction } from '@angular/cdk/bidi';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +18,6 @@ export class RegisterComponent implements OnInit {
   users: User[] = [];
   addedCountry = false;
   formSubmitted = false;
-  textDirection: Direction = "ltr";
 
   constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
 
@@ -34,17 +32,6 @@ export class RegisterComponent implements OnInit {
     });
     this.users = this.service.getUsers();
     this.countriesList = this.service.getCountries();
-    if (!this.translateService.currentLang) {
-      this.textDirection = "ltr";
-    }
-    else {
-      if (this.translateService.currentLang === "ar-LB") {
-        this.textDirection = "rtl";
-      }
-      else {
-        this.textDirection = "ltr";
-      }
-    }
   }
 
   registerUser(): void {

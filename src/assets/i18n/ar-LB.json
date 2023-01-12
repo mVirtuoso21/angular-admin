@@ -11,8 +11,8 @@
     "name.arabic": "الاسم (بالعربية)",
     "name.arabic.error": "مسموح فقط بالأحرف العربية",
     "gender": "الجنس",
-    "gender.male": "ذكر",
-    "gender.female": "أنثى",
+    "Male": "ذكر",
+    "Female": "أنثى",
     "country": "البلد",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
@@ -24,5 +24,10 @@
     "dashboard": "الصفحة الرئيسية",
     "edit": "تعديل",
     "edit.user": "تعديل المستخدم",
-    "save": "حفظ"
+    "save": "حفظ",
+    "Lebanon": "لبنان",
+    "Libya": "ليبيا",
+    "Latvia": "لاتفيا",
+    "Liberia": "ليبيريا",
+    "adminApp": "الإدارة"
 }

@@ -1,9 +1,9 @@
-import { Direction } from '@angular/cdk/bidi';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
+import { TranslateService } from '@ngx-translate/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -13,23 +13,13 @@ import { ApiService } from 'src/app/services/api.service';
 export class HomeComponent implements OnInit {
   users: User[] = [];
   columns: string[] = ["id", "email", "password", "name.english", "name.arabic", "gender", "country"];
-  textDirection: Direction = "ltr";
+  loggedInUser: any;
 
-  constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
+  constructor(private router: Router, private service: ApiService, private translate: TranslateService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     this.users = this.service.getUsers();
-    if (!this.translateService.currentLang) {
-      this.textDirection = "ltr";
-    }
-    else {
-      if (this.translateService.currentLang === "ar-LB") {
-        this.textDirection = "rtl";
-      }
-      else {
-        this.textDirection = "ltr";
-      }
-    }
+    this.loggedInUser = this.users.find(user => user.id === parseInt(localStorage.getItem("loggedInUserId") as string));
   }
 
   editUser(userId: number): void {
@@ -37,6 +27,20 @@ export class HomeComponent implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['..']);
+    localStorage.setItem("loggedIn", "false");
+    this.router.navigate(['']);
+  }
+
+  userCountries(countriesArray: string[]) {
+    return countriesArray.map(c => this.translate.instant(c));
+  }
+
+  getTranslatedName() {
+    if (this.document.getElementsByTagName("html")[0].lang === "ar") {
+      return this.loggedInUser.arabicName;
+    }
+    else {
+      return this.loggedInUser.englishName;
+    }
   }
 }

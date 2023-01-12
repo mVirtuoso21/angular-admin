@@ -1,4 +1,4 @@
-<div [dir]="textDirection">
+<div>
     <div class="header">
         <h2>{{ 'register' | translate }}</h2>
     </div>
@@ -45,9 +45,9 @@
                     style="margin-left: 1rem; margin-right: 1rem; margin-top: 10px; padding-left: 15px; padding-right: 15px;">
                     <mat-label>{{ 'gender' | translate }}: </mat-label>
                     <mat-radio-group formControlName="gender">
-                        <mat-radio-button value="Male" style="margin-left: 1rem;">{{ 'gender.male' | translate }}
+                        <mat-radio-button value="Male" style="margin-left: 1rem;">{{ 'Male' | translate }}
                         </mat-radio-button>
-                        <mat-radio-button value="Female" style="margin-left: 1rem;">{{ 'gender.female' | translate
+                        <mat-radio-button value="Female" style="margin-left: 1rem;">{{ 'Female' | translate
                             }}</mat-radio-button>
                     </mat-radio-group>
                 </div>
@@ -60,7 +60,8 @@
                         <div *ngFor="let c of country.controls; let i = index">
                             <mat-form-field>
                                 <mat-select [formControlName]="i">
-                                    <mat-option *ngFor="let n of this.countriesList" [value]="n">{{n}}</mat-option>
+                                    <mat-option *ngFor="let n of this.countriesList" [value]="n">{{ n | translate
+                                        }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <button mat-button color="primary" type="button" (click)="removeCountry(i)">{{
