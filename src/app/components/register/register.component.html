@@ -41,20 +41,18 @@
                         {{ 'name.arabic.error' | translate }}</mat-error>
                 </mat-form-field>
 
-                <div
-                    style="margin-left: 1rem; margin-right: 1rem; margin-top: 10px; padding-left: 15px; padding-right: 15px;">
+                <div class="gender-container">
                     <mat-label>{{ 'gender' | translate }}: </mat-label>
                     <mat-radio-group formControlName="gender">
-                        <mat-radio-button value="Male" style="margin-left: 1rem;">
+                        <mat-radio-button value="Male">
                             {{ 'Male' | translate }}</mat-radio-button>
-                        <mat-radio-button value="Female" style="margin-left: 1rem;">
+                        <mat-radio-button value="Female">
                             {{ 'Female' | translate }}</mat-radio-button>
                     </mat-radio-group>
                 </div>
 
                 <div>
-                    <button mat-button color="primary" type="button" (click)="addCountry()"
-                        style="margin-top: 10px; margin-left: 1rem; margin-right: 1rem; padding-left: 15px; padding-right: 15px;">
+                    <button mat-button color="primary" type="button" (click)="addCountry()" class="form-array-button">
                         {{ 'country.add' | translate }}</button>
                     <div formArrayName="country">
                         <div *ngFor="let c of country.controls; let i = index">
@@ -73,7 +71,7 @@
                         class="matError">{{ 'required' | translate }}</mat-error>
                     <mat-error
                         *ngIf="(formGroup.get('country')?.hasError('uniqueCountries') && formSubmitted) || (formGroup.get('country')?.hasError('uniqueCountries') && addedCountry)"
-                        class="matError">{{ 'unique' | translate }}</mat-error>
+                        class="matError">{{ 'country.unique' | translate }}</mat-error>
                 </div>
 
                 <div class="button-container">

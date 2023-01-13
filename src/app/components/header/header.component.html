@@ -1,6 +1,5 @@
 <h1 class="header">{{ 'adminApp' | translate }}</h1>
-<p>canDeactivate, countries unique</p>
-<div id="languageSelectorDiv" style="margin-right: 1rem; margin-left: 1rem;">
+<div id="languageSelectorDiv" class="language-selector-container">
     <mat-select (valueChange)="selectLanguage($event)" style="width: 150px;"
         placeholder="{{ 'language.select' | translate }}">
         <mat-option value="en-US">{{ "language.english" | translate }}</mat-option>
