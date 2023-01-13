@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { validateArabicName } from 'src/app/directives/custom-validators.directive';
+import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   addedCountry = false;
   formSubmitted = false;
 
-  constructor(private router: Router, private service: ApiService, private translateService: TranslateService) { }
+  constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       englishName: new FormControl(null, Validators.required),
       arabicName: new FormControl(null, { validators: [Validators.required, validateArabicName()], updateOn: "change" },),
       gender: new FormControl("Male", Validators.required),
-      country: new FormArray([], [Validators.required]),
+      country: new FormArray([], [Validators.required, validateUniqueCountries()]),
     });
     this.users = this.service.getUsers();
     this.countriesList = this.service.getCountries();

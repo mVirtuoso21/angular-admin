@@ -11,11 +11,12 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  constructor(private router: Router, private service: ApiService, private translate: TranslateService, @Inject(DOCUMENT) private document: Document) { }
+
   users: User[] = [];
   columns: string[] = ["id", "email", "password", "name.english", "name.arabic", "gender", "country"];
   loggedInUser: any;
-
-  constructor(private router: Router, private service: ApiService, private translate: TranslateService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     this.users = this.service.getUsers();

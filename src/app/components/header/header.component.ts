@@ -8,10 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  htmlTag: any;
-  languageSelectorDiv: any;
 
   constructor(@Inject(DOCUMENT) private document: Document, private translateService: TranslateService) { }
+
+  htmlTag: any;
+  languageSelectorDiv: any;
 
   ngOnInit(): void {
     let language = localStorage.getItem("language") ?? "en-US";

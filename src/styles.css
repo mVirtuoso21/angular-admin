@@ -49,3 +49,11 @@ td {
     border-collapse: collapse;
     padding: 10px;
 }
+
+.matError {
+    font-size: 8pt;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 15px;
+    padding-right: 15px;
+}

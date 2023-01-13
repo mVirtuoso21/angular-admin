@@ -24,3 +24,9 @@ export function validateArabicName(): ValidatorFn {
     return !isArabic ? { arabic: true } : null;
   }
 }
+
+export function validateUniqueCountries(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return !(control.value.length === (new Set(control.value).size)) ? { uniqueCountries: true } : null;
+  }
+}

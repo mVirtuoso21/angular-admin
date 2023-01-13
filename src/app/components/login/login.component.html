@@ -12,10 +12,10 @@
                     <mat-form-field>
                         <mat-label>{{ "email" | translate}}</mat-label>
                         <input type="text" matInput formControlName="email" />
-                        <mat-error *ngIf="formGroup.get('email')?.hasError('required')">{{ "required" | translate
-                            }}</mat-error>
-                        <mat-error *ngIf="formGroup.get('email')?.hasError('email')">{{ 'email.error' | translate
-                            }}</mat-error>
+                        <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+                            {{ "required" | translate }}</mat-error>
+                        <mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+                            {{ 'email.error' | translate }}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
@@ -25,8 +25,8 @@
                             [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
-                        <mat-error *ngIf="formGroup.get('password')?.hasError('required')">{{ "required" | translate
-                            }}</mat-error>
+                        <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+                            {{ "required" | translate }}</mat-error>
                     </mat-form-field>
                     <div class="button-container">
                         <button mat-raised-button color="primary" type="submit">{{ "login" | translate}}</button>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="button-container">
-        <button mat-raised-button color="primary" type="button" (click)="goToRegister()">{{ "register" | translate
-            }}</button>
+        <button mat-raised-button color="primary" type="button" (click)="goToRegister()">
+            {{ "register" | translate }}</button>
     </div>
 </div>

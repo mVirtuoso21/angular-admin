@@ -10,11 +10,12 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  constructor(private router: Router, private service: ApiService) { }
+
   formGroup: any;
   hide = true;
   loggedIn: boolean = false;
-
-  constructor(private router: Router, private service: ApiService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -48,5 +49,4 @@ export class LoginComponent implements OnInit {
       alert("Invalid Credentials!");
     }
   }
-
 }

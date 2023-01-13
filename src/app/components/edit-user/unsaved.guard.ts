@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class UnsavedGuard implements CanDeactivate<EditUserComponent> {
+
   constructor(private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   canDeactivate(component: EditUserComponent) {
@@ -24,7 +25,6 @@ export class UnsavedGuard implements CanDeactivate<EditUserComponent> {
     }
     return component.saved;
   }
-
 }
 
 @Component({
