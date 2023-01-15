@@ -44,10 +44,8 @@
                 <div class="gender-container">
                     <mat-label>{{ 'gender' | translate }}: </mat-label>
                     <mat-radio-group formControlName="gender">
-                        <mat-radio-button value="Male">
-                            {{ 'Male' | translate }}</mat-radio-button>
-                        <mat-radio-button value="Female">
-                            {{ 'Female' | translate }}</mat-radio-button>
+                        <mat-radio-button value="Male">{{ 'Male' | translate }}</mat-radio-button>
+                        <mat-radio-button value="Female">{{ 'Female' | translate }}</mat-radio-button>
                     </mat-radio-group>
                 </div>
 
@@ -55,15 +53,24 @@
                     <button mat-button color="primary" type="button" (click)="addCountry()" class="form-array-button">
                         {{ 'country.add' | translate }}</button>
                     <div formArrayName="country">
-                        <div *ngFor="let c of country.controls; let i = index">
-                            <mat-form-field>
-                                <mat-select [formControlName]="i">
-                                    <mat-option *ngFor="let n of this.countriesList" [value]="n">
-                                        {{ n | translate }}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <button mat-button color="primary" type="button" (click)="removeCountry(i)">
-                                {{ 'country.remove' | translate }}</button>
+                        <div *ngFor="let group of country.controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <mat-form-field>
+                                    <mat-select formControlName="countryControl" (valueChange)="resetState(i)">
+                                        <mat-option *ngFor="let countryStates of countriesStatesMap | keyvalue"
+                                            [value]="countryStates.key">{{ countryStates.key | translate }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-select formControlName="stateControl" placeholder="Select City">
+                                        <mat-option
+                                            *ngFor="let state of countriesStatesMap[group.get('countryControl')?.value]"
+                                            [value]="state">{{ state | translate}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <button mat-button color="primary" type="button" (click)="removeCountry(i)">
+                                    {{ 'country.remove' | translate }}</button>
+                            </div>
                         </div>
                     </div>
                     <mat-error

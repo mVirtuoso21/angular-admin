@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
+import { CountryCities } from 'src/app/models/country-cities';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
+
 
 @Component({
   selector: 'app-register',
@@ -12,14 +13,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  constructor(private router: Router, private service: ApiService) { }
+
   formGroup: any;
   hide = true;
-  countriesList: string[] = [];
   users: User[] = [];
   addedCountry = false;
   formSubmitted = false;
-
-  constructor(private router: Router, private service: ApiService) { }
+  countriesStatesMap: CountryCities = {};
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -31,7 +33,7 @@ export class RegisterComponent implements OnInit {
       country: new FormArray([], [Validators.required, validateUniqueCountries()]),
     });
     this.users = this.service.getUsers();
-    this.countriesList = this.service.getCountries();
+    this.countriesStatesMap = this.service.getCountriesMap();
   }
 
   registerUser(): void {
@@ -49,14 +51,20 @@ export class RegisterComponent implements OnInit {
   }
 
   addCountry() {
-    let control = new FormControl("");
-    control.setValue("Lebanon");
-    this.country.push(control);
+    let countryStateGroup = new FormGroup({
+      countryControl: new FormControl("Lebanon"),
+      stateControl: new FormControl("Beyrouth")
+    });
+    this.country.push(countryStateGroup);
     this.addedCountry = true;
   }
 
   removeCountry(countryIndex: number) {
     this.country.removeAt(countryIndex);
+  }
+
+  resetState(i: any) {
+    this.country.controls[i].get("stateControl")?.setValue(null);
   }
 
   back(): void {

@@ -27,6 +27,15 @@ export function validateArabicName(): ValidatorFn {
 
 export function validateUniqueCountries(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    return !(control.value.length === (new Set(control.value).size)) ? { uniqueCountries: true } : null;
+    let selectedCountries: any[] = [];
+    control.value.map((group: any) => selectedCountries.push(group.countryControl));
+    return !(selectedCountries.length === (new Set(selectedCountries).size)) ? { uniqueCountries: true } : null;
   }
 }
+
+// for edit-user-component, should be merged with the updated validator
+// export function validateUniqueCountries(): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     return !(control.value.length === (new Set(control.value).size)) ? { uniqueCountries: true } : null;
+//   }
+// }
