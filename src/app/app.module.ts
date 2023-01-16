@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { CanComponentDeactivateGuard } from './guards/can-component-deactivate.guard';
+import { CanDeactivateDialogComponent } from './components/edit-user/can-deactivate-dialog/can-deactivate-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiService } from './services/api.service';
 import { MatInputModule } from '@angular/material/input';
@@ -35,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     EditUserComponent,
     HeaderComponent,
+    CanDeactivateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [ApiService],
+  providers: [ApiService, CanComponentDeactivateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

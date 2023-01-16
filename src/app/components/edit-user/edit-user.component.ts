@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
+import { CanDeactivateDialogComponent } from './can-deactivate-dialog/can-deactivate-dialog.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,7 +16,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   users: User[] = [];
   userId: any;
@@ -21,8 +25,6 @@ export class EditUserComponent implements OnInit {
   formGroup: any;
   user: any;
   hide = true;
-  dialog: any;
-  snackbar: any;
   index: number = -1;
 
   ngOnInit(): void {
@@ -52,6 +54,18 @@ export class EditUserComponent implements OnInit {
       gender: new FormControl(this.user.gender, Validators.required),
       country: new FormArray(userCountriesControls, [Validators.required, validateUniqueCountries()])
     });
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (!this.saved) {
+      this.dialog.open(CanDeactivateDialogComponent, {
+        height: '100px',
+        width: '350px',
+      });
+      this.snackbar.open("You have unsaved changes.", "OK", { duration: 4000 });
+      return false;
+    }
+    return true;
   }
 
   get country() {
