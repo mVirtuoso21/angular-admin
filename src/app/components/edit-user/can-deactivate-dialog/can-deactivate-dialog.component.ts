@@ -11,5 +11,4 @@ export class CanDeactivateDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
