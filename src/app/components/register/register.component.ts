@@ -40,7 +40,13 @@ export class RegisterComponent implements OnInit {
     this.formSubmitted = true;
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
-      this.users.push(new User(this.formGroup.controls["email"].value, this.formGroup.controls["password"].value, this.formGroup.controls["englishName"].value, this.formGroup.controls["arabicName"].value, this.formGroup.controls["gender"].value, this.formGroup.controls["country"].value));
+      let userCountriesStates: CountryCities[] = [];
+      this.formGroup.controls["country"].value.forEach((item: any) => {
+        let pair: CountryCities = {};
+        pair[item.countryControl] = item.stateControl;
+        userCountriesStates.push(pair);
+      });
+      this.users.push(new User(this.formGroup.controls["email"].value, this.formGroup.controls["password"].value, this.formGroup.controls["englishName"].value, this.formGroup.controls["arabicName"].value, this.formGroup.controls["gender"].value, userCountriesStates));
       this.service.saveUsers(this.users);
       this.back();
     }
@@ -52,8 +58,8 @@ export class RegisterComponent implements OnInit {
 
   addCountry() {
     let countryStateGroup = new FormGroup({
-      countryControl: new FormControl("Lebanon"),
-      stateControl: new FormControl("Beyrouth")
+      countryControl: new FormControl("Lebanon", [Validators.required]),
+      stateControl: new FormControl("Beyrouth", [Validators.required])
     });
     this.country.push(countryStateGroup);
     this.addedCountry = true;

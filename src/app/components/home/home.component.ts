@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
+import { CountryCities } from 'src/app/models/country-cities';
 
 @Component({
   selector: 'app-home',
@@ -32,8 +33,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  userCountries(countriesArray: string[]) {
-    return countriesArray.map(c => this.translate.instant(c));
+  userCountries(countriesCitiesArray: CountryCities[]) {
+    let stringRep = "";
+    countriesCitiesArray.forEach((pair, i) => {
+      Object.keys(pair).forEach(key => {
+        stringRep += this.translate.instant(pair[key]) + " (" + this.translate.instant(key) + ")" + ((i === countriesCitiesArray.length - 1) ? "" : ", ");
+      });
+    });
+    return stringRep;
   }
 
   getTranslatedName() {

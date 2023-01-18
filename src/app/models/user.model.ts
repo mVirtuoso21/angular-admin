@@ -1,4 +1,5 @@
 import { ApiService } from "../services/api.service";
+import { CountryCities } from "./country-cities";
 
 export class User {
     id: number;
@@ -7,22 +8,17 @@ export class User {
     englishName: string;
     arabicName: string;
     gender: string;
-    country: string[] = [];
+    country: CountryCities[] = [];
     service: ApiService = new ApiService();
 
-    constructor(email: string, password: string, englishName: string, arabicName: string, gender: string, country: string | string[]) {
+    constructor(email: string, password: string, englishName: string, arabicName: string, gender: string, country: CountryCities[]) {
         this.id = this.getNewUserId();
         this.email = email;
         this.password = password;
         this.englishName = englishName;
         this.arabicName = arabicName;
         this.gender = gender;
-        if (typeof country === "string") {
-            this.country.push(country);
-        }
-        if (country instanceof Array) {
-            this.country = country;
-        }
+        this.country = country;
     }
 
     getNewUserId(): number {
