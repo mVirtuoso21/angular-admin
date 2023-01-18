@@ -128,7 +128,7 @@ export const data = {
         "Uige",
         "Zaire"
     ],
-    "Antarctica": [],
+    "Antarctica": ["Antarctica"],
     "Antigua and Barbuda": [
         "Barbuda",
         "Redonda",
@@ -178,7 +178,14 @@ export const data = {
         "Vayots' Dzor",
         "Yerevan"
     ],
-    "Australia": [],
+    "Australia": [
+        "New South Wales",
+        "Victoria",
+        "Queenslad",
+        "Western Australia",
+        "South Australia",
+        "Tasmania"
+    ],
     "Austria": [
         "Burgenland",
         "Kaernten",
@@ -643,7 +650,7 @@ export const data = {
         "Saskatchewan",
         "Yukon Territory"
     ],
-    "Cape Verde": [],
+    "Cape Verde": ["Praia"],
     "Central African Republic": [
         "Bamingui-Bangoran",
         "Bangui",
@@ -802,7 +809,7 @@ export const data = {
         "Puntarenas",
         "San Jose"
     ],
-    "Cote d'Ivoire": [],
+    "Cote d'Ivoire": ["Yamoussoukro"],
     "Croatia": [
         "Bjelovarsko-Bilogorska",
         "Brodsko-Posavska",
@@ -1126,7 +1133,7 @@ export const data = {
         "Upper River",
         "Western"
     ],
-    "Georgia": [],
+    "Georgia": ["Tbilisi"],
     "Germany": [
         "Baden-Wuerttemberg",
         "Bayern",
@@ -1339,7 +1346,7 @@ export const data = {
         "Valle",
         "Yoro"
     ],
-    "Hong Kong": [],
+    "Hong Kong": ["Hong Kong"],
     "Hungary": [
         "Bacs-Kiskun",
         "Baranya",
@@ -1681,7 +1688,7 @@ export const data = {
         "Rift Valley",
         "Western"
     ],
-    "Kiribati": [],
+    "Kiribati": ["Tarawa"],
     "Korea North": [
         "Chagang",
         "North Hamgyong",
@@ -2056,8 +2063,11 @@ export const data = {
         "Sikasso",
         "Tombouctou"
     ],
-    "Malta": [],
-    "Marshall Islands": [],
+    "Malta": ["Valetta"],
+    "Marshall Islands": [
+        "Majuro",
+        "Delap-Uliga-Djarrit"
+    ],
     "Mauritania": [
         "Adrar",
         "Assaba",
@@ -2121,7 +2131,7 @@ export const data = {
         "Yucatan",
         "Zacatecas"
     ],
-    "Micronesia": [],
+    "Micronesia": ["Palikir"],
     "Moldova": [
         "Anenii Noi",
         "Basarabeasca",
@@ -2226,7 +2236,7 @@ export const data = {
         "Tetouan",
         "Tiznit"
     ],
-    "Monaco": [],
+    "Monaco": ["Monte Carlo"],
     "Mozambique": [
         "Cabo Delgado",
         "Gaza",
@@ -2255,7 +2265,7 @@ export const data = {
         "Oshikoto",
         "Otjozondjupa"
     ],
-    "Nauru": [],
+    "Nauru": ["Yaren"],
     "Nepal": [
         "Bagmati",
         "Bheri",
@@ -2799,7 +2809,7 @@ export const data = {
         "San Marino Citta",
         "Serravalle"
     ],
-    "Sao Tome": [],
+    "Sao Tome": ["Sao Tome"],
     "Saudi Arabia": [
         "Al Bahah",
         "Al Hudud ash Shamaliyah",
@@ -2859,8 +2869,8 @@ export const data = {
         "Saint Louis",
         "Takamaka"
     ],
-    "Sierra Leone": [],
-    "Singapore": [],
+    "Sierra Leone": ["Freetown"],
+    "Singapore": ["Singapore"],
     "Slovakia": [
         "Banskobystricky",
         "Bratislavsky",
@@ -3280,7 +3290,7 @@ export const data = {
         "Kao-hsiung city",
         "T'ai-pei city"
     ],
-    "Tajikistan": [],
+    "Tajikistan": ["Dushanbe"],
     "Tanzania": [
         "Arusha",
         "Dar es Salaam",
@@ -3394,7 +3404,7 @@ export const data = {
         "Centrale",
         "Maritime"
     ],
-    "Tonga": [],
+    "Tonga": ["Nuku'alofa"],
     "Trinidad and Tobago": [
         "Couva",
         "Diego Martin",
@@ -3624,7 +3634,29 @@ export const data = {
         "Ra's al Khaymah",
         "Umm al Qaywayn"
     ],
-    "United Kingdom": [],
+    "United Kingdom": [
+        "London",
+        "Birmingham",
+        "Glasgow",
+        "Liverpool",
+        "Bristol",
+        "Manchester",
+        "Sheffield",
+        "Leeds",
+        "Edinburgh",
+        "Leicester",
+        "Coventery",
+        "Bradford",
+        "Cardiff",
+        "Belfast",
+        "Nottingham",
+        "Hull",
+        "Newcastle",
+        "Stoke",
+        "Southampton",
+        "Derby",
+        "Reading"
+    ],
     "United States": [
         "Alabama",
         "Alaska",
