@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +8,8 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
   title = 'login-register';
-  loggedIn: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.loggedIn = JSON.parse(localStorage.getItem("loggedIn") ?? "false");
-    if (this.loggedIn) {
-      this.router.navigate(['/home']);
-    }
-    else {
-      this.router.navigate(['login']);
-    }
-  }
+  ngOnInit() { }
 }

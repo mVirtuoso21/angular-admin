@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
+import { CanComponentDeactivate } from 'src/app/guards/can-component-deactivate.guard';
 import { CountryCities } from 'src/app/models/country-cities';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -15,7 +16,7 @@ import { CanDeactivateDialogComponent } from './can-deactivate-dialog/can-deacti
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private route: ActivatedRoute, private service: ApiService, private router: Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 

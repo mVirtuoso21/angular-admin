@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CanComponentDeactivateGuard } from './guards/can-component-deactivate.guard';
+import { CanComponentActivateGuard } from './guards/can-component-activate.guard';
 import { CanDeactivateDialogComponent } from './components/edit-user/can-deactivate-dialog/can-deactivate-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiService } from './services/api.service';
@@ -62,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [ApiService, CanComponentDeactivateGuard],
+  providers: [ApiService, CanComponentDeactivateGuard, CanComponentActivateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
