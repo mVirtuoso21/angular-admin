@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import { CountryCities } from 'src/app/models/country-cities';
 
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.service.getUsers();
-    this.loggedInUser = this.users.find(user => user.id === parseInt(localStorage.getItem("loggedInUserId") as string));
+    this.loggedInUser = this.users.find(user => user.id === +localStorage.getItem("loggedInUserId")!);
   }
 
   editUser(userId: number): void {
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
   back(): void {
     localStorage.setItem("loggedIn", "false");
+    localStorage.setItem("loggedInUserId", "");
     this.router.navigate(['']);
   }
 
@@ -50,5 +51,22 @@ export class HomeComponent implements OnInit {
     else {
       return this.loggedInUser.englishName;
     }
+    // this.users = this.service.getUsers();
+    // this.loggedInUser = this.users.find(user => user.id === parseInt(localStorage.getItem("loggedInUserId") as string));
+    // let username = "";
+    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    //   if (this.loggedInUser) {
+    //     if (event.lang === "en-US") {
+    //       username = this.loggedInUser.englishName;
+    //     }
+    //     else if (event.lang === "ar-LB") {
+    //       username = this.loggedInUser.arabicName;
+    //     }
+    //   }
+    //   else {
+    //     username = "";
+    //   }
+    // });
+    // return username;
   }
 }
