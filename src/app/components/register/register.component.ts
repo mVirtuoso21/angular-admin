@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
+import { validateArabicName, validateUniqueStates } from 'src/app/directives/custom-validators.directive';
 import { CountryCities } from 'src/app/models/country-cities';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
       englishName: new FormControl(null, Validators.required),
       arabicName: new FormControl(null, { validators: [Validators.required, validateArabicName()], updateOn: "change" },),
       gender: new FormControl("Male", Validators.required),
-      country: new FormArray([], [Validators.required, validateUniqueCountries()]),
+      country: new FormArray([], [Validators.required, validateUniqueStates()]),
     });
     this.users = this.service.getUsers();
     this.countriesStatesMap = this.service.getCountriesMap();

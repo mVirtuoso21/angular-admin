@@ -78,8 +78,8 @@
                         *ngIf="(formGroup.get('country').hasError('required') && formSubmitted) || (formGroup.get('country').hasError('required') && addedCountry)"
                         class="matError">{{ 'required' | translate }}</mat-error>
                     <mat-error
-                        *ngIf="(formGroup.get('country')?.hasError('uniqueCountries') && formSubmitted) || (formGroup.get('country')?.hasError('uniqueCountries') && addedCountry)"
-                        class="matError">{{ 'country.unique' | translate }}</mat-error>
+                        *ngIf="(formGroup.get('country')?.hasError('uniqueStates') && formSubmitted) || (formGroup.get('country')?.hasError('uniqueStates') && addedCountry)"
+                        class="matError">{{ 'state.unique' | translate }}</mat-error>
                 </div>
 
                 <div class="button-container">

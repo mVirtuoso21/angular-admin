@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { validateArabicName, validateUniqueCountries } from 'src/app/directives/custom-validators.directive';
+import { validateArabicName, validateUniqueStates } from 'src/app/directives/custom-validators.directive';
 import { CanComponentDeactivate } from 'src/app/guards/can-component-deactivate.guard';
 import { CountryCities } from 'src/app/models/country-cities';
 import { User } from 'src/app/models/user.model';
@@ -49,7 +49,7 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
       englishName: new FormControl(this.user.englishName, Validators.required),
       arabicName: new FormControl(this.user.arabicName, { validators: [Validators.required, validateArabicName()], updateOn: "change" },),
       gender: new FormControl(this.user.gender, Validators.required),
-      country: new FormArray(userCountriesControls, [Validators.required, validateUniqueCountries()])
+      country: new FormArray(userCountriesControls, [Validators.required, validateUniqueStates()])
     });
 
     this.user.country.forEach((pair: CountryCities) => {

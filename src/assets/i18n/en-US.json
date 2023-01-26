@@ -14,7 +14,7 @@
     "Male": "Male",
     "Female": "Female",
     "country": "Country",
-    "country.unique": "Countries must be unique",
+    "state.unique": "Cities must be unique",
     "login": "Login",
     "logout": "Logout",
     "register": "Register",

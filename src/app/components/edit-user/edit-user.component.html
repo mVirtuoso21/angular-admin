@@ -76,8 +76,8 @@
                     </div>
                     <mat-error *ngIf="formGroup.get('country').hasError('required')" class="matError">
                         {{ 'required' | translate }}</mat-error>
-                    <mat-error *ngIf="formGroup.get('country')?.hasError('uniqueCountries')" class="matError">
-                        {{ 'country.unique' | translate }}</mat-error>
+                    <mat-error *ngIf="formGroup.get('country')?.hasError('uniqueStates')" class="matError">
+                        {{ 'state.unique' | translate }}</mat-error>
                 </div>
 
                 <div class="button-container">

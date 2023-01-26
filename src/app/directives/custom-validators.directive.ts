@@ -25,10 +25,10 @@ export function validateArabicName(): ValidatorFn {
   }
 }
 
-export function validateUniqueCountries(): ValidatorFn {
+export function validateUniqueStates(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    let selectedCountries: any[] = [];
-    control.value.map((group: any) => selectedCountries.push(group.countryControl));
-    return !(selectedCountries.length === (new Set(selectedCountries).size)) ? { uniqueCountries: true } : null;
+    let selectedStates: any[] = [];
+    control.value.map((group: any) => selectedStates.push(group.stateControl));
+    return !(selectedStates.length === (new Set(selectedStates).size)) ? { uniqueStates: true } : null;
   }
 }
