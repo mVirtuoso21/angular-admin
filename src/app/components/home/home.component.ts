@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import { CountryCities } from 'src/app/models/country-cities';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { CountryCities } from 'src/app/models/country-cities';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private service: ApiService, private translate: TranslateService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private router: Router, private service: ApiService, private translate: TranslateService, @Inject(DOCUMENT) private document: Document, private langService: LanguageService) { }
 
   users: User[] = [];
   columns: string[] = ["id", "email", "password", "name.english", "name.arabic", "gender", "country"];
@@ -31,7 +32,9 @@ export class HomeComponent implements OnInit {
   back(): void {
     localStorage.setItem("loggedIn", "false");
     localStorage.setItem("loggedInUserId", "");
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => {
+      this.langService.changeName();
+    });
   }
 
   userCountries(countriesCitiesArray: CountryCities[]) {
@@ -42,31 +45,5 @@ export class HomeComponent implements OnInit {
       });
     });
     return stringRep;
-  }
-
-  getTranslatedName() {
-    if (this.document.getElementsByTagName("html")[0].lang === "ar") {
-      return this.loggedInUser.arabicName;
-    }
-    else {
-      return this.loggedInUser.englishName;
-    }
-    // this.users = this.service.getUsers();
-    // this.loggedInUser = this.users.find(user => user.id === parseInt(localStorage.getItem("loggedInUserId") as string));
-    // let username = "";
-    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    //   if (this.loggedInUser) {
-    //     if (event.lang === "en-US") {
-    //       username = this.loggedInUser.englishName;
-    //     }
-    //     else if (event.lang === "ar-LB") {
-    //       username = this.loggedInUser.arabicName;
-    //     }
-    //   }
-    //   else {
-    //     username = "";
-    //   }
-    // });
-    // return username;
   }
 }

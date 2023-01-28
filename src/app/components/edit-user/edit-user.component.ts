@@ -81,7 +81,7 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
 
   addCountry() {
     let countryStateGroup = new FormGroup({
-      countryControl: new FormControl("Lebanon", [Validators.required]),
+      countryControl: new FormControl("Lebanon", [Validators.required]), //validateUniqueStates(this.country);
       stateControl: new FormControl("Beyrouth", [Validators.required])
     });
     this.country.push(countryStateGroup);

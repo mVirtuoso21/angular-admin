@@ -57,3 +57,9 @@ td {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.mat-form-field-label,
+.mat-select-value {
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+}

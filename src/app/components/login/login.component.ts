@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from 'src/app/services/api.service';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private service: ApiService) { }
+  constructor(private router: Router, private service: ApiService, private langService: LanguageService) { }
 
   formGroup: any;
   hide = true;
@@ -42,7 +43,9 @@ export class LoginComponent implements OnInit {
     if (userExists) {
       localStorage.setItem("loggedIn", "true");
       localStorage.setItem("loggedInUserId", JSON.stringify(userId));
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']).then(() => {
+        this.langService.changeName();
+      });
     }
     else {
       localStorage.setItem("loggedIn", "false");
