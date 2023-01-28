@@ -68,6 +68,8 @@
                                             *ngFor="let state of countriesStatesMap[group.get('countryControl')?.value]"
                                             [value]="state">{{ state | translate}}</mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="group.get('stateControl')!.hasError('uniqueStates')"
+                                        class="matError">{{ 'state.unique' | translate }}</mat-error>
                                 </mat-form-field>
                                 <button mat-button color="primary" type="button" (click)="removeCountry(i)">
                                     {{ 'country.remove' | translate }}</button>
@@ -77,9 +79,6 @@
                     <mat-error
                         *ngIf="(formGroup.get('country').hasError('required') && formSubmitted) || (formGroup.get('country').hasError('required') && addedCountry)"
                         class="matError">{{ 'required' | translate }}</mat-error>
-                    <mat-error
-                        *ngIf="(formGroup.get('country')?.hasError('uniqueStates') && formSubmitted) || (formGroup.get('country')?.hasError('uniqueStates') && addedCountry)"
-                        class="matError">{{ 'state.unique' | translate }}</mat-error>
                 </div>
 
                 <div class="button-container">

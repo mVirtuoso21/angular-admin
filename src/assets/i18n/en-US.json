@@ -33,5 +33,7 @@
     "adminApp": "Admin App",
     "Beyrouth": "Beyrouth",
     "Beqaa": "Beqaa",
-    "user": "User"
+    "user": "User",
+    "unsavedChanges": "You have unsaved changes",
+    "OK": "OK"
 }

@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { validateArabicName, validateUniqueStates } from 'src/app/directives/custom-validators.directive';
+import { TranslateService } from '@ngx-translate/core';
+import { validateArabicName, validateUniqueStates } from 'src/app/directives/validators.directive';
 import { CanComponentDeactivate } from 'src/app/guards/can-component-deactivate.guard';
 import { CountryCities } from 'src/app/models/country-cities';
 import { User } from 'src/app/models/user.model';
@@ -18,7 +18,7 @@ import { CanDeactivateDialogComponent } from './can-deactivate-dialog/can-deacti
 })
 export class EditUserComponent implements OnInit, CanComponentDeactivate {
 
-  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
+  constructor(private route: ActivatedRoute, private service: ApiService, private router: Router, private dialog: MatDialog, private snackbar: MatSnackBar, private translate: TranslateService) { }
 
   users: User[] = [];
   userId: any;
@@ -40,6 +40,13 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
         this.index = i;
       }
     });
+    // in case user id was not found, redirect user home
+    if (this.index === -1) {
+      alert("User not found.");
+      this.saved = true;
+      this.router.navigate(['home']);
+      return;
+    }
     this.countriesStatesMap = this.service.getCountriesMap();
     let userCountriesControls: FormControl[] = [];
 
@@ -49,27 +56,27 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
       englishName: new FormControl(this.user.englishName, Validators.required),
       arabicName: new FormControl(this.user.arabicName, { validators: [Validators.required, validateArabicName()], updateOn: "change" },),
       gender: new FormControl(this.user.gender, Validators.required),
-      country: new FormArray(userCountriesControls, [Validators.required, validateUniqueStates()])
+      country: new FormArray(userCountriesControls, [Validators.required])
     });
 
     this.user.country.forEach((pair: CountryCities) => {
       Object.keys(pair).forEach(key => {
         let countryStateGroup = new FormGroup({
           countryControl: new FormControl(key, [Validators.required]),
-          stateControl: new FormControl(pair[key], [Validators.required])
+          stateControl: new FormControl(pair[key], [Validators.required, validateUniqueStates(this.country)])
         });
         this.country.push(countryStateGroup);
       });
     });
   }
 
-  canDeactivate(): Observable<boolean> | boolean {
+  canDeactivate(): boolean {
     if (!this.saved) {
       this.dialog.open(CanDeactivateDialogComponent, {
         height: '100px',
         width: '350px',
       });
-      this.snackbar.open("You have unsaved changes.", "OK", { duration: 4000 });
+      this.snackbar.open(this.translate.instant("unsavedChanges"), this.translate.instant("OK"), { duration: 4000, direction: this.translate.currentLang === "ar-LB" ? "rtl" : "ltr" });
       return false;
     }
     return true;
@@ -81,8 +88,8 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
 
   addCountry() {
     let countryStateGroup = new FormGroup({
-      countryControl: new FormControl("Lebanon", [Validators.required]), //validateUniqueStates(this.country);
-      stateControl: new FormControl("Beyrouth", [Validators.required])
+      countryControl: new FormControl("Lebanon", [Validators.required]),
+      stateControl: new FormControl("Beyrouth", [Validators.required, validateUniqueStates(this.country)])
     });
     this.country.push(countryStateGroup);
   }

@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ValidatorFn, AbstractControl, ValidationErrors } from "@angular/forms";
+import { ValidatorFn, AbstractControl, ValidationErrors, FormArray } from "@angular/forms";
 
 @Directive({
   selector: '[appCustomValidators]'
@@ -25,10 +25,10 @@ export function validateArabicName(): ValidatorFn {
   }
 }
 
-export function validateUniqueStates(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
+export function validateUniqueStates(country: FormArray): ValidatorFn {
+  return (): ValidationErrors | null => {
     let selectedStates: any[] = [];
-    control.value.map((group: any) => selectedStates.push(group.stateControl));
+    country.getRawValue().map((group: any) => selectedStates.push(group.stateControl));
     return !(selectedStates.length === (new Set(selectedStates).size)) ? { uniqueStates: true } : null;
   }
 }
