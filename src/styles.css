@@ -58,8 +58,6 @@ td {
     padding-right: 15px;
 }
 
-.mat-form-field-label,
-.mat-select-value {
-    overflow-y: visible !important;
-    overflow-x: hidden !important;
+.mat-form-field {
+    line-height: 1.25;
 }
